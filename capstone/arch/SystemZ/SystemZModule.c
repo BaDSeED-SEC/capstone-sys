@@ -1,5 +1,5 @@
 /* Capstone Disassembly Engine */
-/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2014 */
+/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2015 */
 
 #ifdef CAPSTONE_HAS_SYSZ
 
@@ -12,6 +12,7 @@
 static cs_err init(cs_struct *ud)
 {
 	MCRegisterInfo *mri;
+
 	mri = cs_mem_malloc(sizeof(*mri));
 
 	SystemZ_init(mri);
@@ -34,22 +35,13 @@ static cs_err option(cs_struct *handle, cs_opt_type type, size_t value)
 	if (type == CS_OPT_SYNTAX)
 		handle->syntax = (int) value;
 
-	// Do not set mode because only CS_MODE_BIG_ENDIAN is valid; we cannot
-	// test for CS_MODE_LITTLE_ENDIAN because it is 0
-
 	return CS_ERR_OK;
-}
-
-static void destroy(cs_struct *handle)
-{
 }
 
 void SystemZ_enable(void)
 {
 	cs_arch_init[CS_ARCH_SYSZ] = init;
 	cs_arch_option[CS_ARCH_SYSZ] = option;
-	cs_arch_destroy[CS_ARCH_SYSZ] = destroy;
-	cs_arch_disallowed_mode_mask[CS_ARCH_SYSZ] = ~CS_MODE_BIG_ENDIAN;
 
 	// support this arch
 	all_arch |= (1 << CS_ARCH_SYSZ);

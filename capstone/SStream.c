@@ -1,9 +1,6 @@
 /* Capstone Disassembly Engine */
-/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2014 */
+/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2015 */
 
-#if !defined(_MSC_VER) || !defined(_KERNEL_MODE)
-#include <stdint.h>
-#endif
 #include <stdarg.h>
 #if defined(CAPSTONE_HAS_OSXKERNEL)
 #include <libkern/libkern.h>
@@ -11,9 +8,8 @@
 #include <stdio.h>
 #endif
 #include <string.h>
-#include <limits.h>
 
-#include <platform.h>
+#include <capstone/platform.h>
 
 #include "SStream.h"
 #include "cs_priv.h"
@@ -29,7 +25,7 @@ void SStream_Init(SStream *ss)
 	ss->buffer[0] = '\0';
 }
 
-void SStream_concat0(SStream *ss, const char *s)
+void SStream_concat0(SStream *ss, char *s)
 {
 #ifndef CAPSTONE_DIET
 	unsigned int len = (unsigned int) strlen(s);
@@ -56,10 +52,6 @@ void SStream_concat(SStream *ss, const char *fmt, ...)
 // print number with prefix #
 void printInt64Bang(SStream *O, int64_t val)
 {
-	if (val == LONG_MIN) {
-		return;
-	}
-
 	if (val >= 0) {
 		if (val > HEX_THRESHOLD)
 			SStream_concat(O, "#0x%"PRIx64, val);
@@ -67,7 +59,7 @@ void printInt64Bang(SStream *O, int64_t val)
 			SStream_concat(O, "#%"PRIu64, val);
 	} else {
 		if (val <- HEX_THRESHOLD)
-			SStream_concat(O, "#-0x%"PRIx64, -val);
+			SStream_concat(O, "#-0x%"PRIx64, (uint64_t)-val);
 		else
 			SStream_concat(O, "#-%"PRIu64, -val);
 	}
@@ -84,10 +76,6 @@ void printUInt64Bang(SStream *O, uint64_t val)
 // print number
 void printInt64(SStream *O, int64_t val)
 {
-	if (val == LONG_MIN) {
-		return;
-	}
-
 	if (val >= 0) {
 		if (val > HEX_THRESHOLD)
 			SStream_concat(O, "0x%"PRIx64, val);
@@ -95,7 +83,7 @@ void printInt64(SStream *O, int64_t val)
 			SStream_concat(O, "%"PRIu64, val);
 	} else {
 		if (val <- HEX_THRESHOLD)
-			SStream_concat(O, "-0x%"PRIx64, -val);
+			SStream_concat(O, "-0x%"PRIx64, (uint64_t)-val);
 		else
 			SStream_concat(O, "-%"PRIu64, -val);
 	}
@@ -104,22 +92,14 @@ void printInt64(SStream *O, int64_t val)
 // print number in decimal mode
 void printInt32BangDec(SStream *O, int32_t val)
 {
-	if (val == INT_MIN) {
-		return;
-	}
-
 	if (val >= 0)
 		SStream_concat(O, "#%u", val);
 	else
-		SStream_concat(O, "#-%u", -val);
+		SStream_concat(O, "#-%u", (uint32_t)-val);
 }
 
 void printInt32Bang(SStream *O, int32_t val)
 {
-	if (val == INT_MIN) {
-		return;
-	}
-
 	if (val >= 0) {
 		if (val > HEX_THRESHOLD)
 			SStream_concat(O, "#0x%x", val);
@@ -127,7 +107,7 @@ void printInt32Bang(SStream *O, int32_t val)
 			SStream_concat(O, "#%u", val);
 	} else {
 		if (val <- HEX_THRESHOLD)
-			SStream_concat(O, "#-0x%x", -val);
+			SStream_concat(O, "#-0x%x", (uint32_t)-val);
 		else
 			SStream_concat(O, "#-%u", -val);
 	}
@@ -135,10 +115,6 @@ void printInt32Bang(SStream *O, int32_t val)
 
 void printInt32(SStream *O, int32_t val)
 {
-	if (val == INT_MIN) {
-		return;
-	}
-
 	if (val >= 0) {
 		if (val > HEX_THRESHOLD)
 			SStream_concat(O, "0x%x", val);
@@ -146,7 +122,7 @@ void printInt32(SStream *O, int32_t val)
 			SStream_concat(O, "%u", val);
 	} else {
 		if (val <- HEX_THRESHOLD)
-			SStream_concat(O, "-0x%x", -val);
+			SStream_concat(O, "-0x%x", (uint32_t)-val);
 		else
 			SStream_concat(O, "-%u", -val);
 	}

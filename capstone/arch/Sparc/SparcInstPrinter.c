@@ -12,7 +12,7 @@
 //===----------------------------------------------------------------------===//
 
 /* Capstone Disassembly Engine */
-/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2014 */
+/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2015 */
 
 #ifdef CAPSTONE_HAS_SPARC
 
@@ -27,7 +27,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
 
 #include "SparcInstPrinter.h"
 #include "../../MCInst.h"
@@ -39,8 +38,8 @@
 
 #include "Sparc.h"
 
-static const char *getRegisterName(unsigned RegNo);
-static void printInstruction(MCInst *MI, SStream *O, const MCRegisterInfo *MRI);
+static char *getRegisterName(unsigned RegNo);
+static void printInstruction(MCInst *MI, SStream *O, MCRegisterInfo *MRI);
 static void printMemOperand(MCInst *MI, int opNum, SStream *O, const char *Modifier);
 static void printOperand(MCInst *MI, int opNum, SStream *O);
 
@@ -165,7 +164,7 @@ static bool printSparcAliasInstr(MCInst *MI, SStream *O)
 
 static void printOperand(MCInst *MI, int opNum, SStream *O)
 {
-	int Imm;
+	int64_t Imm;
 	unsigned reg;
 	MCOperand *MO = MCInst_getOperand(MI, opNum);
 
@@ -200,8 +199,8 @@ static void printOperand(MCInst *MI, int opNum, SStream *O)
 		// backward, so they need to be multiplied by 4
 		switch (MI->Opcode) {
 			case SP_CALL:
-				Imm = SignExtend32(Imm, 30);
-				Imm += (uint32_t)MI->address;
+				// Imm = SignExtend32(Imm, 30);
+				Imm += MI->address;
 				break;
 
 			// Branch on integer condition with prediction (BPcc)
@@ -219,7 +218,7 @@ static void printOperand(MCInst *MI, int opNum, SStream *O)
 			case SP_BPFCCANT:
 			case SP_BPFCCNT:
 				Imm = SignExtend32(Imm, 19);
-				Imm = (uint32_t)MI->address + Imm * 4;
+				Imm = MI->address + Imm * 4;
 				break;
 
 			// Branch on integer condition (Bicc)
@@ -230,7 +229,7 @@ static void printOperand(MCInst *MI, int opNum, SStream *O)
 			case SP_FBCOND:
 			case SP_FBCONDA:
 				Imm = SignExtend32(Imm, 22);
-				Imm = (uint32_t)MI->address + Imm * 4;
+				Imm = MI->address + Imm * 4;
 				break;
 
 			// Branch on integer register with prediction (BPr)
@@ -259,27 +258,11 @@ static void printOperand(MCInst *MI, int opNum, SStream *O)
 			case SP_BPZnapn:
 			case SP_BPZnapt:
 				Imm = SignExtend32(Imm, 16);
-				Imm = (uint32_t)MI->address + Imm * 4;
+				Imm = MI->address + Imm * 4;
 				break;
 		}
-		
-		if (Imm == INT_MIN) {
-			// printf("ERROR: invalid Imm value\n");
-			return;
-		}
 
-		if (Imm >= 0) {
-			if (Imm > HEX_THRESHOLD)
-				SStream_concat(O, "0x%x", Imm);
-			else
-				SStream_concat(O, "%u", Imm);
-		} else {
-			if (Imm < -HEX_THRESHOLD)
-				//cast first, then negate
-				SStream_concat(O, "-0x%x", -(uint32_t)Imm);
-			else
-				SStream_concat(O, "-%u", -Imm);
-		}
+		printInt64(O, Imm);
 
 		if (MI->csh->detail) {
 			if (MI->csh->doing_mem) {

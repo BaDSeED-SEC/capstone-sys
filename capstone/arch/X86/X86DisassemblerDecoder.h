@@ -14,7 +14,7 @@
  *===----------------------------------------------------------------------===*/
 
 /* Capstone Disassembly Engine */
-/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2014 */
+/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2015 */
 
 #ifndef CS_X86_DISASSEMBLERDECODER_H
 #define CS_X86_DISASSEMBLERDECODER_H
@@ -23,9 +23,6 @@
 #include <libkern/libkern.h>
 #else
 #include <stdio.h>
-#endif
-#if !defined(_MSC_VER) || !defined(_KERNEL_MODE)
-#include <stdint.h>
 #endif
 
 #include "X86DisassemblerDecoderCommon.h"
@@ -355,7 +352,15 @@
   ENTRY(DR4)        \
   ENTRY(DR5)        \
   ENTRY(DR6)        \
-  ENTRY(DR7)
+  ENTRY(DR7)        \
+  ENTRY(DR8)        \
+  ENTRY(DR9)        \
+  ENTRY(DR10)        \
+  ENTRY(DR11)        \
+  ENTRY(DR12)        \
+  ENTRY(DR13)        \
+  ENTRY(DR14)        \
+  ENTRY(DR15)
 
 #define REGS_CONTROL  \
   ENTRY(CR0)          \

@@ -12,7 +12,7 @@
 //===----------------------------------------------------------------------===//
 
 /* Capstone Disassembly Engine */
-/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2014 */
+/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2015 */
 
 #ifdef CAPSTONE_HAS_XCORE
 
@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <platform.h>
+#include <capstone/platform.h>
 
 #include "XCoreInstPrinter.h"
 #include "../../MCInst.h"
@@ -34,7 +34,7 @@
 #include "../../MathExtras.h"
 #include "XCoreMapping.h"
 
-static const char *getRegisterName(unsigned RegNo);
+static char *getRegisterName(unsigned RegNo);
 
 void XCore_post_printer(csh ud, cs_insn *insn, char *insn_asm, MCInst *mci)
 {

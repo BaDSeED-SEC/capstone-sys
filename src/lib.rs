@@ -80,6 +80,7 @@ mod test {
             index: 0,
             scale: 0,
             disp: 0,
+            lshift: 0,
         };
 
         // Union types
@@ -93,6 +94,8 @@ mod test {
             type_: arm_op_type::ARM_OP_REG,
             __bindgen_anon_1: cs_arm_op__bindgen_ty_2 { reg: 0 },
             subtracted: false,
+            access: 0,
+            neon_lane: 0,
         };
         cs_arm {
             usermode: false,
@@ -147,6 +150,7 @@ mod test {
             ext: arm64_extender::ARM64_EXT_UXTB,
             type_: arm64_op_type::ARM64_OP_REG,
             __bindgen_anon_1: cs_arm64_op__bindgen_ty_2 { reg: 0 },
+            access: 0,
         };
         cs_arm64 {
             cc: arm64_cc::ARM64_CC_EQ,
@@ -324,6 +328,7 @@ mod test {
             size: 0,
             avx_bcast: x86_avx_bcast::X86_AVX_BCAST_2,
             avx_zero_opmask: false,
+            access: 0,
         };
         cs_x86 {
             prefix: [0; 4],
@@ -342,6 +347,8 @@ mod test {
             avx_rm: x86_avx_rm::X86_AVX_RM_RN,
             op_count: 0,
             operands: [op; 8],
+            __bindgen_anon_1: cs_x86__bindgen_ty_1 { eflags: 0 },
+            xop_cc: x86_xop_cc::X86_XOP_CC_INVALID,
         };
 
         // x86-specific constants
@@ -438,7 +445,7 @@ mod test {
 
         println!("Capstone version (major, minor) = {:?}", (major, minor));
 
-        assert!(major == 3, "Invalid major version {:?}", major);
+        assert!(major == 4, "Invalid major version {:?}", major);
         assert!(
             minor >= 0 && minor < 1000,
             "Invalid minor version {:?}",

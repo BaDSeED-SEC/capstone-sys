@@ -5,3 +5,115 @@ Cargo.lock
 #*#
 README.html
 CHANGELOG.html
+
+# Capstone
+
+# Object files
+capstone/*.o
+capstone/*.ko
+
+# Gcc dependency-tracking files
+capstone/*.d
+
+# Libraries
+capstone/*.lib
+capstone/*.a
+
+# Shared objects (inc. Windows DLLs)
+capstone/*.dll
+capstone/*.so
+capstone/*.so.*
+capstone/*.dylib
+
+# Executables
+capstone/*.exe
+capstone/*.out
+capstone/*.app
+
+# python
+capstone/bindings/python/build/
+capstone/bindings/python/capstone.egg-info/
+capstone/*.pyc
+
+# java
+capstone/bindings/java/capstone.jar
+
+# ocaml
+capstone/bindings/ocaml/*.cmi
+capstone/bindings/ocaml/*.cmx
+capstone/bindings/ocaml/*.cmxa
+capstone/bindings/ocaml/*.mli
+capstone/bindings/ocaml/test
+capstone/bindings/ocaml/test_arm
+capstone/bindings/ocaml/test_arm64
+capstone/bindings/ocaml/test_basic
+capstone/bindings/ocaml/test_mips
+capstone/bindings/ocaml/test_x86
+capstone/bindings/ocaml/test_detail
+capstone/bindings/ocaml/test_ppc
+capstone/bindings/ocaml/test_sparc
+capstone/bindings/ocaml/test_systemz
+capstone/bindings/ocaml/test_xcore
+capstone/bindings/ocaml/test_m680x
+
+
+# test binaries
+capstone/tests/test_basic
+capstone/tests/test_detail
+capstone/tests/test_iter
+capstone/tests/test_arm
+capstone/tests/test_arm64
+capstone/tests/test_mips
+capstone/tests/test_x86
+capstone/tests/test_ppc
+capstone/tests/test_skipdata
+capstone/tests/test_sparc
+capstone/tests/test_systemz
+capstone/tests/test_xcore
+capstone/tests/*.static
+capstone/tests/test_customized_mnem
+capstone/tests/test_m68k
+capstone/tests/test_tms320c64x
+capstone/tests/test_m680x
+capstone/tests/test_evm
+
+# vim tmp file
+capstone/*.swp
+capstone/*~
+
+capstone/capstone.pc
+
+# local files
+capstone/_*
+
+# freebsd ports: generated file with "make makesum" command
+capstone/packages/freebsd/ports/devel/capstone/distinfo
+
+# VisualStudio
+capstone/ProjectUpgradeLog.log
+capstone/Debug/
+capstone/Release/
+capstone/ipch/
+capstone/build*/
+capstone/*.sdf
+capstone/*.opensdf
+capstone/*.suo
+capstone/*.user
+capstone/*.backup
+capstone/*.VC.db
+capstone/*.VC.opendb
+
+# Xcode
+capstone/xcode/Capstone.xcodeproj/xcuserdata
+capstone/xcode/Capstone.xcodeproj/project.xcworkspace/xcuserdata
+
+# suite/
+capstone/test_arm_regression
+capstone/test_arm_regression.o
+capstone/fuzz_harness
+capstone/test_iter_benchmark
+
+
+capstone/*.s
+
+capstone/cstool/cstool

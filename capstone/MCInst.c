@@ -1,5 +1,5 @@
 /* Capstone Disassembly Engine */
-/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2014 */
+/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2015 */
 
 #if defined(CAPSTONE_HAS_OSXKERNEL)
 #include <libkern/libkern.h>
@@ -16,11 +16,15 @@
 
 void MCInst_Init(MCInst *inst)
 {
+	inst->Opcode = 0;
 	inst->OpcodePub = 0;
 	inst->size = 0;
 	inst->has_imm = false;
 	inst->op1_size = 0;
 	inst->writeback = false;
+	inst->ac_idx = 0;
+	inst->popcode_adjust = 0;
+	inst->assembly[0] = '\0';
 }
 
 void MCInst_clear(MCInst *inst)

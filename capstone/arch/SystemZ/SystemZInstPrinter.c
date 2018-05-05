@@ -12,15 +12,14 @@
 //===----------------------------------------------------------------------===//
 
 /* Capstone Disassembly Engine */
-/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2014 */
+/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2015 */
 
 #ifdef CAPSTONE_HAS_SYSZ
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
-#include <platform.h>
+#include <capstone/platform.h>
 
 #include "SystemZInstPrinter.h"
 #include "../../MCInst.h"
@@ -296,11 +295,6 @@ static void printPCRelOperand(MCInst *MI, int OpNum, SStream *O)
 
 	if (MCOperand_isImm(MO)) {
 		imm = (int32_t)MCOperand_getImm(MO);
-		if (imm == INT_MIN) {
-			// printf("ERROR: invalid Imm value\n");
-			return;
-		}
-
 		if (imm >= 0) {
 			if (imm > HEX_THRESHOLD)
 				SStream_concat(O, "0x%x", imm);
@@ -308,8 +302,7 @@ static void printPCRelOperand(MCInst *MI, int OpNum, SStream *O)
 				SStream_concat(O, "%u", imm);
 		} else {
 			if (imm < -HEX_THRESHOLD)
-				//cast first, then negate
-				SStream_concat(O, "-0x%x", -(uint32_t)imm);
+				SStream_concat(O, "-0x%x", -imm);
 			else
 				SStream_concat(O, "-%u", -imm);
 		}
@@ -320,6 +313,12 @@ static void printPCRelOperand(MCInst *MI, int OpNum, SStream *O)
 			MI->flat_insn->detail->sysz.op_count++;
 		}
 	}
+}
+
+static void printPCRelTLSOperand(MCInst *MI, int OpNum, SStream *O)
+{
+	// Output the PC-relative operand.
+	printPCRelOperand(MI, OpNum, O);
 }
 
 static void printOperand(MCInst *MI, int OpNum, SStream *O)
@@ -371,7 +370,7 @@ static void printBDLAddrOperand(MCInst *MI, int OpNum, SStream *O)
 
 static void printCond4Operand(MCInst *MI, int OpNum, SStream *O)
 {
-	static const char *const CondNames[] = {
+	static char *const CondNames[] = {
 		"o", "h", "nle", "l", "nhe", "lh", "ne",
 		"e", "nlh", "he", "nl", "le", "nh", "no"
 	};

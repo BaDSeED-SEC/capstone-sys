@@ -271,7 +271,7 @@ fn main() {
             #[cfg(not(windows))] build_capstone_gmake();
         }
 
-        header_search_paths.push([CAPSTONE_DIR, "include"].iter().collect());
+        header_search_paths.push([CAPSTONE_DIR, "include", "capstone"].iter().collect());
         link_type = Some(LinkType::Static);
     }
 

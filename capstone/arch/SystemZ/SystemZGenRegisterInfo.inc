@@ -7,7 +7,7 @@
 \*===----------------------------------------------------------------------===*/
 
 /* Capstone Disassembly Engine */
-/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2014 */
+/* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2015 */
 
 
 #ifdef GET_REGINFO_ENUM
@@ -131,18 +131,6 @@ enum {
   SystemZ_ADDR128BitRegClassID = 11
 };
 
-// Subregister indices
-enum {
-  SystemZ_NoSubRegister,
-  SystemZ_subreg_h32,	// 1
-  SystemZ_subreg_h64,	// 2
-  SystemZ_subreg_hh32,	// 3
-  SystemZ_subreg_hl32,	// 4
-  SystemZ_subreg_l32,	// 5
-  SystemZ_subreg_l64,	// 6
-  SystemZ_NUM_TARGET_SUBREGS
-};
-
 #endif // GET_REGINFO_ENUM
 
 /*===- TableGen'erated file -------------------------------------*- C++ -*-===*\
@@ -157,7 +145,7 @@ enum {
 #ifdef GET_REGINFO_MC_DESC
 #undef GET_REGINFO_MC_DESC
 
-static const MCPhysReg SystemZRegDiffLists[] = {
+static MCPhysReg SystemZRegDiffLists[] = {
   /* 0 */ 65193, 1, 1, 1, 0,
   /* 5 */ 65469, 1, 0,
   /* 8 */ 65519, 2, 0,
@@ -205,246 +193,246 @@ static const MCPhysReg SystemZRegDiffLists[] = {
   /* 171 */ 65535, 0,
 };
 
-static const uint16_t SystemZSubRegIdxLists[] = {
+static uint16_t SystemZSubRegIdxLists[] = {
   /* 0 */ 5, 1, 0,
   /* 3 */ 6, 1, 2, 3, 0,
   /* 8 */ 6, 5, 1, 2, 4, 3, 0,
 };
 
-static const MCRegisterDesc SystemZRegDesc[] = { // Descriptors
-  { 2, 0, 0, 0, 0 },
-  { 0, 4, 4, 2, 2737 },
-  { 13, 38, 33, 1, 2737 },
-  { 31, 38, 33, 1, 2737 },
-  { 49, 38, 30, 1, 2737 },
-  { 67, 38, 30, 1, 2737 },
-  { 85, 38, 30, 1, 2737 },
-  { 103, 38, 30, 1, 2737 },
-  { 111, 38, 27, 1, 2737 },
-  { 119, 38, 27, 1, 2737 },
-  { 127, 38, 27, 1, 2737 },
-  { 135, 38, 27, 1, 2737 },
-  { 3, 38, 24, 1, 2737 },
-  { 21, 38, 24, 1, 2737 },
-  { 39, 38, 24, 1, 2737 },
-  { 57, 38, 24, 1, 2737 },
-  { 75, 38, 21, 1, 2737 },
-  { 93, 38, 21, 1, 2737 },
-  { 288, 35, 4, 3, 129 },
-  { 296, 35, 4, 3, 129 },
-  { 324, 40, 4, 3, 177 },
-  { 332, 40, 4, 3, 177 },
-  { 340, 45, 4, 3, 225 },
-  { 348, 45, 4, 3, 225 },
-  { 300, 50, 4, 3, 273 },
-  { 314, 50, 4, 3, 273 },
-  { 357, 4, 32, 2, 1809 },
-  { 366, 4, 32, 2, 1809 },
-  { 375, 4, 29, 2, 1809 },
-  { 384, 4, 29, 2, 1809 },
-  { 393, 4, 29, 2, 1809 },
-  { 402, 4, 29, 2, 1809 },
-  { 406, 4, 26, 2, 1809 },
-  { 410, 4, 26, 2, 1809 },
-  { 414, 4, 26, 2, 1809 },
-  { 418, 4, 26, 2, 1809 },
-  { 352, 4, 23, 2, 1809 },
-  { 361, 4, 23, 2, 1809 },
-  { 370, 4, 23, 2, 1809 },
-  { 379, 4, 23, 2, 1809 },
-  { 388, 4, 20, 2, 1809 },
-  { 397, 4, 20, 2, 1809 },
-  { 17, 119, 104, 0, 82 },
-  { 35, 119, 98, 0, 82 },
-  { 53, 119, 98, 0, 82 },
-  { 71, 119, 92, 0, 82 },
-  { 89, 119, 92, 0, 82 },
-  { 107, 119, 86, 0, 82 },
-  { 115, 119, 86, 0, 82 },
-  { 123, 119, 80, 0, 82 },
-  { 131, 119, 80, 0, 82 },
-  { 139, 119, 74, 0, 82 },
-  { 8, 119, 74, 0, 82 },
-  { 26, 119, 68, 0, 82 },
-  { 44, 119, 68, 0, 82 },
-  { 62, 119, 62, 0, 82 },
-  { 80, 119, 62, 0, 82 },
-  { 98, 119, 56, 0, 82 },
-  { 148, 4, 106, 2, 1778 },
-  { 157, 4, 100, 2, 1778 },
-  { 166, 4, 100, 2, 1778 },
-  { 175, 4, 94, 2, 1778 },
-  { 184, 4, 94, 2, 1778 },
-  { 193, 4, 88, 2, 1778 },
-  { 197, 4, 88, 2, 1778 },
-  { 201, 4, 82, 2, 1778 },
-  { 205, 4, 82, 2, 1778 },
-  { 209, 4, 76, 2, 1778 },
-  { 143, 4, 76, 2, 1778 },
-  { 152, 4, 70, 2, 1778 },
-  { 161, 4, 70, 2, 1778 },
-  { 170, 4, 64, 2, 1778 },
-  { 179, 4, 64, 2, 1778 },
-  { 188, 4, 58, 2, 1778 },
-  { 218, 4, 103, 2, 1746 },
-  { 227, 4, 97, 2, 1746 },
-  { 236, 4, 97, 2, 1746 },
-  { 245, 4, 91, 2, 1746 },
-  { 254, 4, 91, 2, 1746 },
-  { 263, 4, 85, 2, 1746 },
-  { 267, 4, 85, 2, 1746 },
-  { 271, 4, 79, 2, 1746 },
-  { 275, 4, 79, 2, 1746 },
-  { 279, 4, 73, 2, 1746 },
-  { 213, 4, 73, 2, 1746 },
-  { 222, 4, 67, 2, 1746 },
-  { 231, 4, 67, 2, 1746 },
-  { 240, 4, 61, 2, 1746 },
-  { 249, 4, 61, 2, 1746 },
-  { 258, 4, 55, 2, 1746 },
-  { 292, 115, 4, 8, 4 },
-  { 310, 122, 4, 8, 4 },
-  { 328, 129, 4, 8, 4 },
-  { 336, 136, 4, 8, 4 },
-  { 344, 143, 4, 8, 4 },
-  { 283, 150, 4, 8, 4 },
-  { 305, 157, 4, 8, 4 },
-  { 319, 164, 4, 8, 4 },
+static MCRegisterDesc SystemZRegDesc[] = { // Descriptors
+  { 2, 0, 0, 0, 0, 0 },
+  { 0, 4, 4, 2, 2737, 0 },
+  { 13, 38, 33, 1, 2737, 3 },
+  { 31, 38, 33, 1, 2737, 3 },
+  { 49, 38, 30, 1, 2737, 3 },
+  { 67, 38, 30, 1, 2737, 3 },
+  { 85, 38, 30, 1, 2737, 3 },
+  { 103, 38, 30, 1, 2737, 3 },
+  { 111, 38, 27, 1, 2737, 3 },
+  { 119, 38, 27, 1, 2737, 3 },
+  { 127, 38, 27, 1, 2737, 3 },
+  { 135, 38, 27, 1, 2737, 3 },
+  { 3, 38, 24, 1, 2737, 3 },
+  { 21, 38, 24, 1, 2737, 3 },
+  { 39, 38, 24, 1, 2737, 3 },
+  { 57, 38, 24, 1, 2737, 3 },
+  { 75, 38, 21, 1, 2737, 3 },
+  { 93, 38, 21, 1, 2737, 3 },
+  { 288, 35, 4, 3, 129, 2 },
+  { 296, 35, 4, 3, 129, 2 },
+  { 324, 40, 4, 3, 177, 2 },
+  { 332, 40, 4, 3, 177, 2 },
+  { 340, 45, 4, 3, 225, 2 },
+  { 348, 45, 4, 3, 225, 2 },
+  { 300, 50, 4, 3, 273, 2 },
+  { 314, 50, 4, 3, 273, 2 },
+  { 357, 4, 32, 2, 1809, 0 },
+  { 366, 4, 32, 2, 1809, 0 },
+  { 375, 4, 29, 2, 1809, 0 },
+  { 384, 4, 29, 2, 1809, 0 },
+  { 393, 4, 29, 2, 1809, 0 },
+  { 402, 4, 29, 2, 1809, 0 },
+  { 406, 4, 26, 2, 1809, 0 },
+  { 410, 4, 26, 2, 1809, 0 },
+  { 414, 4, 26, 2, 1809, 0 },
+  { 418, 4, 26, 2, 1809, 0 },
+  { 352, 4, 23, 2, 1809, 0 },
+  { 361, 4, 23, 2, 1809, 0 },
+  { 370, 4, 23, 2, 1809, 0 },
+  { 379, 4, 23, 2, 1809, 0 },
+  { 388, 4, 20, 2, 1809, 0 },
+  { 397, 4, 20, 2, 1809, 0 },
+  { 17, 119, 104, 0, 82, 7 },
+  { 35, 119, 98, 0, 82, 7 },
+  { 53, 119, 98, 0, 82, 7 },
+  { 71, 119, 92, 0, 82, 7 },
+  { 89, 119, 92, 0, 82, 7 },
+  { 107, 119, 86, 0, 82, 7 },
+  { 115, 119, 86, 0, 82, 7 },
+  { 123, 119, 80, 0, 82, 7 },
+  { 131, 119, 80, 0, 82, 7 },
+  { 139, 119, 74, 0, 82, 7 },
+  { 8, 119, 74, 0, 82, 7 },
+  { 26, 119, 68, 0, 82, 7 },
+  { 44, 119, 68, 0, 82, 7 },
+  { 62, 119, 62, 0, 82, 7 },
+  { 80, 119, 62, 0, 82, 7 },
+  { 98, 119, 56, 0, 82, 7 },
+  { 148, 4, 106, 2, 1778, 0 },
+  { 157, 4, 100, 2, 1778, 0 },
+  { 166, 4, 100, 2, 1778, 0 },
+  { 175, 4, 94, 2, 1778, 0 },
+  { 184, 4, 94, 2, 1778, 0 },
+  { 193, 4, 88, 2, 1778, 0 },
+  { 197, 4, 88, 2, 1778, 0 },
+  { 201, 4, 82, 2, 1778, 0 },
+  { 205, 4, 82, 2, 1778, 0 },
+  { 209, 4, 76, 2, 1778, 0 },
+  { 143, 4, 76, 2, 1778, 0 },
+  { 152, 4, 70, 2, 1778, 0 },
+  { 161, 4, 70, 2, 1778, 0 },
+  { 170, 4, 64, 2, 1778, 0 },
+  { 179, 4, 64, 2, 1778, 0 },
+  { 188, 4, 58, 2, 1778, 0 },
+  { 218, 4, 103, 2, 1746, 0 },
+  { 227, 4, 97, 2, 1746, 0 },
+  { 236, 4, 97, 2, 1746, 0 },
+  { 245, 4, 91, 2, 1746, 0 },
+  { 254, 4, 91, 2, 1746, 0 },
+  { 263, 4, 85, 2, 1746, 0 },
+  { 267, 4, 85, 2, 1746, 0 },
+  { 271, 4, 79, 2, 1746, 0 },
+  { 275, 4, 79, 2, 1746, 0 },
+  { 279, 4, 73, 2, 1746, 0 },
+  { 213, 4, 73, 2, 1746, 0 },
+  { 222, 4, 67, 2, 1746, 0 },
+  { 231, 4, 67, 2, 1746, 0 },
+  { 240, 4, 61, 2, 1746, 0 },
+  { 249, 4, 61, 2, 1746, 0 },
+  { 258, 4, 55, 2, 1746, 0 },
+  { 292, 115, 4, 8, 4, 5 },
+  { 310, 122, 4, 8, 4, 5 },
+  { 328, 129, 4, 8, 4, 5 },
+  { 336, 136, 4, 8, 4, 5 },
+  { 344, 143, 4, 8, 4, 5 },
+  { 283, 150, 4, 8, 4, 5 },
+  { 305, 157, 4, 8, 4, 5 },
+  { 319, 164, 4, 8, 4, 5 },
 };
 
   // GRX32Bit Register Class...
-  static const MCPhysReg GRX32Bit[] = {
+  static MCPhysReg GRX32Bit[] = {
     SystemZ_R0L, SystemZ_R1L, SystemZ_R2L, SystemZ_R3L, SystemZ_R4L, SystemZ_R5L, SystemZ_R0H, SystemZ_R1H, SystemZ_R2H, SystemZ_R3H, SystemZ_R4H, SystemZ_R5H, SystemZ_R15L, SystemZ_R15H, SystemZ_R14L, SystemZ_R14H, SystemZ_R13L, SystemZ_R13H, SystemZ_R12L, SystemZ_R12H, SystemZ_R11L, SystemZ_R11H, SystemZ_R10L, SystemZ_R10H, SystemZ_R9L, SystemZ_R9H, SystemZ_R8L, SystemZ_R8H, SystemZ_R7L, SystemZ_R7H, SystemZ_R6L, SystemZ_R6H, 
   };
 
   // GRX32Bit Bit set.
-  static const uint8_t GRX32BitBits[] = {
+  static uint8_t GRX32BitBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xff, 0xff, 0xff, 0x03, 
   };
 
   // FP32Bit Register Class...
-  static const MCPhysReg FP32Bit[] = {
+  static MCPhysReg FP32Bit[] = {
     SystemZ_F0S, SystemZ_F1S, SystemZ_F2S, SystemZ_F3S, SystemZ_F4S, SystemZ_F5S, SystemZ_F6S, SystemZ_F7S, SystemZ_F8S, SystemZ_F9S, SystemZ_F10S, SystemZ_F11S, SystemZ_F12S, SystemZ_F13S, SystemZ_F14S, SystemZ_F15S, 
   };
 
   // FP32Bit Bit set.
-  static const uint8_t FP32BitBits[] = {
+  static uint8_t FP32BitBits[] = {
     0x00, 0x00, 0x00, 0xfc, 0xff, 0x03, 
   };
 
   // GR32Bit Register Class...
-  static const MCPhysReg GR32Bit[] = {
+  static MCPhysReg GR32Bit[] = {
     SystemZ_R0L, SystemZ_R1L, SystemZ_R2L, SystemZ_R3L, SystemZ_R4L, SystemZ_R5L, SystemZ_R15L, SystemZ_R14L, SystemZ_R13L, SystemZ_R12L, SystemZ_R11L, SystemZ_R10L, SystemZ_R9L, SystemZ_R8L, SystemZ_R7L, SystemZ_R6L, 
   };
 
   // GR32Bit Bit set.
-  static const uint8_t GR32BitBits[] = {
+  static uint8_t GR32BitBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xff, 0x03, 
   };
 
   // GRH32Bit Register Class...
-  static const MCPhysReg GRH32Bit[] = {
+  static MCPhysReg GRH32Bit[] = {
     SystemZ_R0H, SystemZ_R1H, SystemZ_R2H, SystemZ_R3H, SystemZ_R4H, SystemZ_R5H, SystemZ_R15H, SystemZ_R14H, SystemZ_R13H, SystemZ_R12H, SystemZ_R11H, SystemZ_R10H, SystemZ_R9H, SystemZ_R8H, SystemZ_R7H, SystemZ_R6H, 
   };
 
   // GRH32Bit Bit set.
-  static const uint8_t GRH32BitBits[] = {
+  static uint8_t GRH32BitBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xff, 0x03, 
   };
 
   // ADDR32Bit Register Class...
-  static const MCPhysReg ADDR32Bit[] = {
+  static MCPhysReg ADDR32Bit[] = {
     SystemZ_R1L, SystemZ_R2L, SystemZ_R3L, SystemZ_R4L, SystemZ_R5L, SystemZ_R15L, SystemZ_R14L, SystemZ_R13L, SystemZ_R12L, SystemZ_R11L, SystemZ_R10L, SystemZ_R9L, SystemZ_R8L, SystemZ_R7L, SystemZ_R6L, 
   };
 
   // ADDR32Bit Bit set.
-  static const uint8_t ADDR32BitBits[] = {
+  static uint8_t ADDR32BitBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0xff, 0x03, 
   };
 
   // CCRegs Register Class...
-  static const MCPhysReg CCRegs[] = {
+  static MCPhysReg CCRegs[] = {
     SystemZ_CC, 
   };
 
   // CCRegs Bit set.
-  static const uint8_t CCRegsBits[] = {
+  static uint8_t CCRegsBits[] = {
     0x02, 
   };
 
   // FP64Bit Register Class...
-  static const MCPhysReg FP64Bit[] = {
+  static MCPhysReg FP64Bit[] = {
     SystemZ_F0D, SystemZ_F1D, SystemZ_F2D, SystemZ_F3D, SystemZ_F4D, SystemZ_F5D, SystemZ_F6D, SystemZ_F7D, SystemZ_F8D, SystemZ_F9D, SystemZ_F10D, SystemZ_F11D, SystemZ_F12D, SystemZ_F13D, SystemZ_F14D, SystemZ_F15D, 
   };
 
   // FP64Bit Bit set.
-  static const uint8_t FP64BitBits[] = {
+  static uint8_t FP64BitBits[] = {
     0xfc, 0xff, 0x03, 
   };
 
   // GR64Bit Register Class...
-  static const MCPhysReg GR64Bit[] = {
+  static MCPhysReg GR64Bit[] = {
     SystemZ_R0D, SystemZ_R1D, SystemZ_R2D, SystemZ_R3D, SystemZ_R4D, SystemZ_R5D, SystemZ_R15D, SystemZ_R14D, SystemZ_R13D, SystemZ_R12D, SystemZ_R11D, SystemZ_R10D, SystemZ_R9D, SystemZ_R8D, SystemZ_R7D, SystemZ_R6D, 
   };
 
   // GR64Bit Bit set.
-  static const uint8_t GR64BitBits[] = {
+  static uint8_t GR64BitBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xff, 0x03, 
   };
 
   // ADDR64Bit Register Class...
-  static const MCPhysReg ADDR64Bit[] = {
+  static MCPhysReg ADDR64Bit[] = {
     SystemZ_R1D, SystemZ_R2D, SystemZ_R3D, SystemZ_R4D, SystemZ_R5D, SystemZ_R15D, SystemZ_R14D, SystemZ_R13D, SystemZ_R12D, SystemZ_R11D, SystemZ_R10D, SystemZ_R9D, SystemZ_R8D, SystemZ_R7D, SystemZ_R6D, 
   };
 
   // ADDR64Bit Bit set.
-  static const uint8_t ADDR64BitBits[] = {
+  static uint8_t ADDR64BitBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0xff, 0x03, 
   };
 
   // FP128Bit Register Class...
-  static const MCPhysReg FP128Bit[] = {
+  static MCPhysReg FP128Bit[] = {
     SystemZ_F0Q, SystemZ_F1Q, SystemZ_F4Q, SystemZ_F5Q, SystemZ_F8Q, SystemZ_F9Q, SystemZ_F12Q, SystemZ_F13Q, 
   };
 
   // FP128Bit Bit set.
-  static const uint8_t FP128BitBits[] = {
+  static uint8_t FP128BitBits[] = {
     0x00, 0x00, 0xfc, 0x03, 
   };
 
   // GR128Bit Register Class...
-  static const MCPhysReg GR128Bit[] = {
+  static MCPhysReg GR128Bit[] = {
     SystemZ_R0Q, SystemZ_R2Q, SystemZ_R4Q, SystemZ_R12Q, SystemZ_R10Q, SystemZ_R8Q, SystemZ_R6Q, SystemZ_R14Q, 
   };
 
   // GR128Bit Bit set.
-  static const uint8_t GR128BitBits[] = {
+  static uint8_t GR128BitBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0x03, 
   };
 
   // ADDR128Bit Register Class...
-  static const MCPhysReg ADDR128Bit[] = {
+  static MCPhysReg ADDR128Bit[] = {
     SystemZ_R2Q, SystemZ_R4Q, SystemZ_R12Q, SystemZ_R10Q, SystemZ_R8Q, SystemZ_R6Q, SystemZ_R14Q, 
   };
 
   // ADDR128Bit Bit set.
-  static const uint8_t ADDR128BitBits[] = {
+  static uint8_t ADDR128BitBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0x03, 
   };
 
-static const MCRegisterClass SystemZMCRegisterClasses[] = {
-  { "GRX32Bit", GRX32Bit, GRX32BitBits, 32, sizeof(GRX32BitBits), SystemZ_GRX32BitRegClassID, 4, 4, 1, 1 },
-  { "FP32Bit", FP32Bit, FP32BitBits, 16, sizeof(FP32BitBits), SystemZ_FP32BitRegClassID, 4, 4, 1, 1 },
-  { "GR32Bit", GR32Bit, GR32BitBits, 16, sizeof(GR32BitBits), SystemZ_GR32BitRegClassID, 4, 4, 1, 1 },
-  { "GRH32Bit", GRH32Bit, GRH32BitBits, 16, sizeof(GRH32BitBits), SystemZ_GRH32BitRegClassID, 4, 4, 1, 1 },
-  { "ADDR32Bit", ADDR32Bit, ADDR32BitBits, 15, sizeof(ADDR32BitBits), SystemZ_ADDR32BitRegClassID, 4, 4, 1, 1 },
-  { "CCRegs", CCRegs, CCRegsBits, 1, sizeof(CCRegsBits), SystemZ_CCRegsRegClassID, 4, 4, 1, 1 },
-  { "FP64Bit", FP64Bit, FP64BitBits, 16, sizeof(FP64BitBits), SystemZ_FP64BitRegClassID, 8, 8, 1, 1 },
-  { "GR64Bit", GR64Bit, GR64BitBits, 16, sizeof(GR64BitBits), SystemZ_GR64BitRegClassID, 8, 8, 1, 1 },
-  { "ADDR64Bit", ADDR64Bit, ADDR64BitBits, 15, sizeof(ADDR64BitBits), SystemZ_ADDR64BitRegClassID, 8, 8, 1, 1 },
-  { "FP128Bit", FP128Bit, FP128BitBits, 8, sizeof(FP128BitBits), SystemZ_FP128BitRegClassID, 16, 16, 1, 1 },
-  { "GR128Bit", GR128Bit, GR128BitBits, 8, sizeof(GR128BitBits), SystemZ_GR128BitRegClassID, 16, 16, 1, 1 },
-  { "ADDR128Bit", ADDR128Bit, ADDR128BitBits, 7, sizeof(ADDR128BitBits), SystemZ_ADDR128BitRegClassID, 16, 16, 1, 1 },
+static MCRegisterClass SystemZMCRegisterClasses[] = {
+  { GRX32Bit, GRX32BitBits, 42, 32, sizeof(GRX32BitBits), SystemZ_GRX32BitRegClassID, 4, 4, 1, 1 },
+  { FP32Bit, FP32BitBits, 16, 16, sizeof(FP32BitBits), SystemZ_FP32BitRegClassID, 4, 4, 1, 1 },
+  { GR32Bit, GR32BitBits, 34, 16, sizeof(GR32BitBits), SystemZ_GR32BitRegClassID, 4, 4, 1, 1 },
+  { GRH32Bit, GRH32BitBits, 7, 16, sizeof(GRH32BitBits), SystemZ_GRH32BitRegClassID, 4, 4, 1, 1 },
+  { ADDR32Bit, ADDR32BitBits, 24, 15, sizeof(ADDR32BitBits), SystemZ_ADDR32BitRegClassID, 4, 4, 1, 1 },
+  { CCRegs, CCRegsBits, 0, 1, sizeof(CCRegsBits), SystemZ_CCRegsRegClassID, 4, 4, 1, 1 },
+  { FP64Bit, FP64BitBits, 51, 16, sizeof(FP64BitBits), SystemZ_FP64BitRegClassID, 8, 8, 1, 1 },
+  { GR64Bit, GR64BitBits, 69, 16, sizeof(GR64BitBits), SystemZ_GR64BitRegClassID, 8, 8, 1, 1 },
+  { ADDR64Bit, ADDR64BitBits, 59, 15, sizeof(ADDR64BitBits), SystemZ_ADDR64BitRegClassID, 8, 8, 1, 1 },
+  { FP128Bit, FP128BitBits, 77, 8, sizeof(FP128BitBits), SystemZ_FP128BitRegClassID, 16, 16, 1, 1 },
+  { GR128Bit, GR128BitBits, 97, 8, sizeof(GR128BitBits), SystemZ_GR128BitRegClassID, 16, 16, 1, 1 },
+  { ADDR128Bit, ADDR128BitBits, 86, 7, sizeof(ADDR128BitBits), SystemZ_ADDR128BitRegClassID, 16, 16, 1, 1 },
 };
 
 #endif // GET_REGINFO_MC_DESC
